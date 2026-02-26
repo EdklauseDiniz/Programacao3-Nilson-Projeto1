@@ -13,9 +13,15 @@ function HomeScreen({ navigation, route }) {
       <ScrollView contentContainerStyle={{ alignItems: 'center' }}>
 
         {[ 
+<<<<<<< HEAD
           { nome: "Marcos Andrade", tel: "81 99614-2890", email:"marcos@gmail.com" },
           { nome: "Patrícia Tavares", tel: "81 99876-5332", email:"patricia@gmail.com" },
           { nome: "Rodrigo Antunes", tel: "81 98776-5525", email:"rodrigo@gmail.com" },
+=======
+          { nome: "Marcos Andrade", tel: "81 99614-2890" },
+          { nome: "Patrícia Tavares", tel: "81 99876-5332" },
+          { nome: "Rodrigo Antunes", tel: "81 98776-5525" }
+>>>>>>> 2d8748ff00f2bda3380cde60d59a1430335b9979
         ].map((item, index) => (
           <View key={index} style={styles.container1}>
             <Image
@@ -23,6 +29,7 @@ function HomeScreen({ navigation, route }) {
               style={styles.login}
             />
             <View>
+<<<<<<< HEAD
               <TouchableOpacity onPress={() => navigation.navigate('Alterar', { item, index })}>
                 <Text style={styles.label}>{item.nome}</Text>
                 <Text style={styles.label}>{item.tel}</Text>  
@@ -30,6 +37,13 @@ function HomeScreen({ navigation, route }) {
             </View>
             <View style={styles.container2} />
           </View> 
+=======
+              <Text>{item.nome}</Text>
+              <Text>{item.tel}</Text>
+            </View>
+            <View style={styles.container2} />
+          </View>
+>>>>>>> 2d8748ff00f2bda3380cde60d59a1430335b9979
         ))}
 
       </ScrollView>
@@ -37,6 +51,7 @@ function HomeScreen({ navigation, route }) {
   );
 }
 
+<<<<<<< HEAD
 function AlterarScreen({ navigation, route }) {
 
   const { item, index } = route.params;
@@ -65,6 +80,8 @@ function AlterarScreen({ navigation, route }) {
   );
 }
 
+=======
+>>>>>>> 2d8748ff00f2bda3380cde60d59a1430335b9979
 function LoginScreen({ navigation }) {
   return (
     <View style={styles.inicio}>
@@ -120,6 +137,7 @@ function UsuariosScreen({ navigation }) {
   );
 }
 
+<<<<<<< HEAD
 function CadastroScreen({ navigation }) {
   return (
     <View style={styles.containerCadastro}>
@@ -139,16 +157,23 @@ function CadastroScreen({ navigation }) {
   )
 }
 
+=======
+>>>>>>> 2d8748ff00f2bda3380cde60d59a1430335b9979
 export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Login">
 
+<<<<<<< HEAD
         <Stack.Screen 
           name="Login" 
           component={LoginScreen} 
           options={{
           headerTitleAlign: 'center'}}/>
+=======
+        <Stack.Screen name="Login" component={LoginScreen} options={{
+        headerTitleAlign: 'center'}}/>
+>>>>>>> 2d8748ff00f2bda3380cde60d59a1430335b9979
 
         <Stack.Screen
           name="Home"
@@ -156,7 +181,11 @@ export default function App() {
           options={({ navigation }) => ({
             headerTitleAlign: 'center',
             headerRight: () => (
+<<<<<<< HEAD
               <TouchableOpacity onPress={() => navigation.navigate('Cadastro')}>
+=======
+              <TouchableOpacity onPress={() => navigation.navigate('Usuarios')}>
+>>>>>>> 2d8748ff00f2bda3380cde60d59a1430335b9979
                 <Image
                   style={styles.add}
                   source={{ uri: 'https://cdn-icons-png.flaticon.com/512/54/54414.png' }}
@@ -167,6 +196,7 @@ export default function App() {
         />
 
         <Stack.Screen name="Usuarios" component={UsuariosScreen} 
+<<<<<<< HEAD
           options={({}) => ({
           headerTitleAlign: 'center',
         })} />
@@ -176,6 +206,19 @@ export default function App() {
         
         <Stack.Screen name="Alterar" component={AlterarScreen} 
         options={{headerTitleAlign: 'center'}} />
+=======
+        options={({ navigation }) => ({
+          headerTitleAlign: 'center',
+          headerRight: () => (
+            <TouchableOpacity onPress={() => navigation.navigation('Usuarios')}>
+              <Image
+                style={styles.add}
+                source={{ uri: 'https://cdn-icons-png.flaticon.com/512/54/54414.png' }}
+              />
+            </TouchableOpacity>
+          ),
+        })} />
+>>>>>>> 2d8748ff00f2bda3380cde60d59a1430335b9979
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -203,9 +246,14 @@ const styles = StyleSheet.create({
   },
 
   container2: {
+<<<<<<< HEAD
     width: '95%',
     height: 5,
     borderRadius: 5,
+=======
+    width: '45%',
+    height: 5,
+>>>>>>> 2d8748ff00f2bda3380cde60d59a1430335b9979
     backgroundColor: '#808080',
     marginTop: 10,
   },
@@ -246,22 +294,33 @@ const styles = StyleSheet.create({
   buttonazul: {
     marginTop: 20,
     backgroundColor: 'blue',
+<<<<<<< HEAD
     width: 200,
     height: 40,
+=======
+    padding: 10,
+>>>>>>> 2d8748ff00f2bda3380cde60d59a1430335b9979
     borderRadius: 5,
   },
 
   buttonvermelho: {
     marginTop: 10,
     backgroundColor: 'red',
+<<<<<<< HEAD
     width: 200,
     height: 40,
+=======
+    padding: 10,
+>>>>>>> 2d8748ff00f2bda3380cde60d59a1430335b9979
     borderRadius: 5,
   },
 
   buttonText: {
     color: '#fff',
     textAlign: 'center',
+<<<<<<< HEAD
     lineHeight: 40,
+=======
+>>>>>>> 2d8748ff00f2bda3380cde60d59a1430335b9979
   },
 });
