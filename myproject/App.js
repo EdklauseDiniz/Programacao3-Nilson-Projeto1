@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import * as React from 'react';
-import { StyleSheet, Text, View, Button, TouchableOpacity, TextInput, Image, SafeAreaView } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, TextInput, Image, ScrollView } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
@@ -8,94 +8,188 @@ const Stack = createNativeStackNavigator();
 
 function HomeScreen({ navigation, route }) {
 
-  const username = route?.params?.username;
-  const idade = route?.params?.idade;
-
   return (
-    <SafeAreaView style={{flex:1}}>
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>Marcos Andrade</Text>
-        <Text>81 99614-2890</Text>
-        <Text>Idade: {idade}</Text>
-      </View>
-    </SafeAreaView>
+    <View style={{ flex: 1 }}>
+      <ScrollView contentContainerStyle={{ alignItems: 'center' }}>
+
+        {[ 
+          { nome: "Marcos Andrade", tel: "81 99614-2890" },
+          { nome: "Patrícia Tavares", tel: "81 99876-5332" },
+          { nome: "Rodrigo Antunes", tel: "81 98776-5525" }
+        ].map((item, index) => (
+          <View key={index} style={styles.container1}>
+            <Image
+              source={{ uri: 'https://cdn-icons-png.flaticon.com/512/3135/3135715.png' }}
+              style={styles.login}
+            />
+            <View>
+              <Text>{item.nome}</Text>
+              <Text>{item.tel}</Text>
+            </View>
+            <View style={styles.container2} />
+          </View>
+        ))}
+
+      </ScrollView>
+    </View>
   );
 }
 
 function LoginScreen({ navigation }) {
   return (
-    <View style={styles.container}>
-      <Image source={{
-        uri:'https://cdn-icons-png.flaticon.com/512/3135/3135715.png'}} 
-        style={styles.login}/>
-      <Text style={styles.text}>Login</Text>
-      <TextInput style={styles.input}></TextInput>
-      <Text style={styles.text}>Senha</Text>
-      <TextInput style={styles.input}></TextInput>
+    <View style={styles.inicio}>
+      <Image
+        source={{ uri: 'https://cdn-icons-png.flaticon.com/512/3135/3135715.png' }}
+        style={styles.imagem}
+      />
+
+      <Text style={styles.label}>Login</Text>
+      <TextInput style={styles.input} />
+
+      <Text style={styles.label}>Senha</Text>
+      <TextInput style={styles.input} secureTextEntry />
+
       <TouchableOpacity
         style={styles.buttonazul}
-        onPress={() => navigation.navigate('Home', { username: 'Nilson', idade: 30 })}
+        onPress={() => navigation.navigate('Home')}
       >
-        <Text style={{ color: '#fff' }}>Login</Text>
+        <Text style={styles.buttonText}>Login</Text>
       </TouchableOpacity>
+
       <TouchableOpacity
         style={styles.buttonvermelho}
-        onPress={() => navigation.navigate('Home', { username: 'Nilson', idade: 30 })}
+        onPress={() => navigation.navigate('Usuarios')}
       >
-        <Text style={{ color: '#fff'}}>Cadastrar-se</Text>
+        <Text style={styles.buttonText}>Cadastrar-se</Text>
       </TouchableOpacity>
+
       <StatusBar style="auto" />
     </View>
   );
 }
 
+function UsuariosScreen({ navigation }) {
+  return (
+    <View style={styles.containerCadastro}>
+      <Text style={styles.label}>Nome</Text>
+      <TextInput style={styles.input} />
+
+      <Text style={styles.label}>CPF</Text>
+      <TextInput style={styles.input} />
+
+      <Text style={styles.label}>Email</Text>
+      <TextInput style={styles.input} />
+
+      <Text style={styles.label}>Senha</Text>
+      <TextInput style={styles.input} secureTextEntry />
+
+      <TouchableOpacity style={styles.buttonazul}>
+        <Text style={styles.buttonText}>Salvar</Text>
+      </TouchableOpacity>
+    </View>
+  );
+}
+
 export default function App() {
-  return(
+  return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Login">
-        <Stack.Screen name="Login" component={LoginScreen} />
-        <Stack.Screen name="Home" component={HomeScreen} options={{headerRight: () => (
-          <TouchableOpacity>
-            <Image style={styles.add} source={{uri:'https://cdn-icons-png.flaticon.com/512/54/54414.png'}}/>
-          </TouchableOpacity>
-        )}} />
+
+        <Stack.Screen name="Login" component={LoginScreen} options={{
+        headerTitleAlign: 'center'}}/>
+
+        <Stack.Screen
+          name="Home"
+          component={HomeScreen}
+          options={({ navigation }) => ({
+            headerTitleAlign: 'center',
+            headerRight: () => (
+              <TouchableOpacity onPress={() => navigation.navigate('Usuarios')}>
+                <Image
+                  style={styles.add}
+                  source={{ uri: 'https://cdn-icons-png.flaticon.com/512/54/54414.png' }}
+                />
+              </TouchableOpacity>
+            ),
+          })}
+        />
+
+        <Stack.Screen name="Usuarios" component={UsuariosScreen} 
+        options={({ navigation }) => ({
+          headerTitleAlign: 'center',
+          headerRight: () => (
+            <TouchableOpacity onPress={() => navigation.navigation('Usuarios')}>
+              <Image
+                style={styles.add}
+                source={{ uri: 'https://cdn-icons-png.flaticon.com/512/54/54414.png' }}
+              />
+            </TouchableOpacity>
+          ),
+        })} />
       </Stack.Navigator>
     </NavigationContainer>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  inicio: {
     flex: 1,
     backgroundColor: '#fdc761',
     alignItems: 'center',
     justifyContent: 'center',
   },
-  
+
+  containerCadastro: {
+    flex: 1,
+    backgroundColor: '#f0c5c5',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+
+  container1: {
+    width: '100%',
+    alignItems: 'center',
+    marginVertical: 20,
+  },
+
+  container2: {
+    width: '45%',
+    height: 5,
+    backgroundColor: '#808080',
+    marginTop: 10,
+  },
+
   login: {
-    padding: 60,
-    margin: 50,
+    width: 80,
+    height: 80,
+    marginBottom: 10,
   },
 
   add: {
-    padding: 15,
-    right: 75,
+    width: 25,
+    height: 25,
+    marginRight: 15,
   },
 
-  text: {
-    fontSize: 40,
+  imagem: {
+    width: 120,
+    height: 120,
+    marginBottom: 20,
+  },
+
+  label: {
+    fontSize: 20,
   },
 
   input: {
     backgroundColor: '#fff',
-
-    borderColor: '#000000',
+    borderColor: '#000',
     borderRadius: 5,
     borderWidth: 1,
-
-    margin: 15,
-    height: 20,
-    width: 150,
+    margin: 10,
+    height: 40,
+    width: 200,
+    paddingHorizontal: 10,
   },
 
   buttonazul: {
@@ -106,9 +200,14 @@ const styles = StyleSheet.create({
   },
 
   buttonvermelho: {
-    marginTop: 20,
+    marginTop: 10,
     backgroundColor: 'red',
     padding: 10,
     borderRadius: 5,
-  }
+  },
+
+  buttonText: {
+    color: '#fff',
+    textAlign: 'center',
+  },
 });
